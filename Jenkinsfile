@@ -12,16 +12,16 @@ pipeline {
         stage('Dependencies') {
             steps {
                 echo 'Preparing build environment...'
-                bat 'python --version'
+                sh 'python3 --version'
             }
         }
 
         stage('Build') {
             steps {
                 echo 'Building DCosmetics website...'
-                bat 'if exist index.html (echo index.html found) else (exit /b 1)'
-                bat 'if exist style.css (echo style.css found) else (exit /b 1)'
-                bat 'if exist script.js (echo script.js found) else (exit /b 1)'
+                sh 'test -f index.html'
+                sh 'test -f style.css'
+                sh 'test -f script.js'
                 echo 'Website build validation completed successfully.'
             }
         }
@@ -29,7 +29,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running automated website tests...'
-                bat 'python -m unittest tests\\test_website.py'
+                sh 'python3 -m unittest tests/test_website.py'
             }
         }
 
