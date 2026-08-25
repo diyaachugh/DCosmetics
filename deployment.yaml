@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dcosmetics
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dcosmetics
+  template:
+    metadata:
+      labels:
+        app: dcosmetics
+    spec:
+      containers:
+        - name: dcosmetics
+          image: dcosmetics:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
